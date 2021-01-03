@@ -1,0 +1,8 @@
+export const GET_FOODS_CATEGORY = "get_foods_category"
+export const GET_SHOPS = "get_shops"
+export const GET_ADDRESS ="get_address"
+export const USER_INFO = "user_info"
+export const LOG_OUT = "log_out"
+export const SHOP_GOODS = "shop_goods"
+export const SHOP_RATINGS = "shop_ratings"
+export const SHOP_INFO = "shop_info"

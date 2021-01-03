@@ -6,9 +6,16 @@
 </template>
 
 <script>
+import {mapActions} from "vuex"
 import footerNav from "./components/FootNav"
 export default {
   name: 'App',
+  mounted(){
+    this.getUserInfo()
+  },
+  methods:{
+    ...mapActions(['getUserInfo'])
+  },
   components:{
     footerNav
   }

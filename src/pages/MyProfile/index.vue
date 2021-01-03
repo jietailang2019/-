@@ -3,17 +3,17 @@
   <section class="profile">
         <header-top title="我的"/>
         <section class="profile-number">
-          <router-link to="/login" class="profile-link">
+          <router-link :to="userInfo._id?'/':'/login'" class="profile-link">
             <div class="profile_image">
               <i class="iconfont icon-person"></i>
             </div>
             <div class="user-info">
-              <p class="user-info-top">登录/注册</p>
-              <p>
+              <p class="user-info-top" v-if="!userInfo.phone">{{userInfo.name ||'登录/注册'}}</p>
+              <p >
                 <span class="user-icon">
                   <i class="iconfont icon-shouji icon-mobile"></i>
                 </span>
-                <span class="icon-mobile-number">暂无绑定手机号</span>
+                <span class="icon-mobile-number">{{userInfo.phone || '暂无绑定手机号'}}</span>
               </p>
             </div>
             <span class="arrow">
@@ -89,13 +89,31 @@
             </div>
           </a>
         </section>
+        <section class="" v-if="userInfo._id">
+          <mt-button type="danger" style="display:block;width:100%;margin-top:12px" @click="logOut">退出登录</mt-button>
+        </section>
       </section>
 </template>
 
 <script>
   //import x from ''
+  import Vue from "vue"
+  import {Button,MessageBox } from "mint-ui"
+  import {mapState,mapActions} from "vuex"
   import HeaderTop from "../../components/HeaderTop"
+  Vue.component(Button.name,Button)
   export default {
+    computed:{
+      ...mapState(['userInfo'])
+    },
+    methods:{
+      ...mapActions(['log_out']),
+      logOut(){
+        MessageBox.confirm("确定退出登录吗？").then(action =>{
+          this.log_out()
+        })
+      }
+    },
     components:{
       HeaderTop
     }

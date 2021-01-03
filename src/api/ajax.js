@@ -18,7 +18,7 @@ export default function ajax(url='',data={},type="GET"){
       })
       if(queryStr !==''){
         queryStr = queryStr.substring(0,queryStr.lastIndexOf("&"))
-        url=`${url}?${queryStr}`
+        url=url+'?'+queryStr
       }  
       promise = axios.get(url)  
     }else{

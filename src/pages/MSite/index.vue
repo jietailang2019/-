@@ -2,20 +2,20 @@
 <template>
   <section class="msite">
         <!--首页头部-->
-        <header-top title="上海华美整形医疗美容医院">
-          <span class="header_search" slot="search">
+        <header-top :title="address.name">
+          <router-link class="header_search" slot="search" to="/search" tag="span">
             <i class="iconfont icon-sousuo"></i>
-          </span>
-          <span class="header_login" slot="login">
-            <span class="header_login_text">登录|注册</span>
-          </span>
+          </router-link>
+          <router-link class="header_login" slot="login" :to="userInfo._id ?'/profile' :'/login'" tag="span">
+            <span class="header_login_text">{{userInfo._id ?'用户头像':'登录|注册'}}</span>
+          </router-link>
         </header-top>
         <!--首页导航-->
         <nav class="msite_nav">
-          <SwiperNav></SwiperNav>
+          <swiper-nav/>
         </nav>
         <!--首页附近商家-->
-        <shop-list></shop-list>
+        <shop-list/>
       </section>
 </template>
 
@@ -23,8 +23,18 @@
   import HeaderTop from "../../components/HeaderTop"
   import ShopList from "../../components/ShopList"
   import SwiperNav from "../../components/SwiperNav"
+  import {mapState,mapActions} from "vuex"
   //import x from ''
   export default {
+    mounted(){
+      this.getAddress()
+    },
+    computed:{
+      ...mapState(['address','userInfo']),
+    },
+    methods:{
+      ...mapActions(['getAddress'])
+    },
     components:{
       HeaderTop,
       SwiperNav,
@@ -41,6 +51,5 @@
             bottom-border-1px(#e4e4e4)
             margin-top 45px
             height 200px
-            background #fff
-        
+            background #fff        
 </style>
