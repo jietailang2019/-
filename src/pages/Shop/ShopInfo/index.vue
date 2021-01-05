@@ -66,18 +66,31 @@ export default {
     }
   },
   mounted(){
-    this.$nextTick(()=>{
-      setTimeout(()=>{
-        this.bScroll = new BScroll(".shop-info")
-      },20)
-    })
+    this._initScroll()
+  },
+  methods:{
+    _initScroll(){
+      this.bScroll = new BScroll(".shop-info")
+    },
+    setWidth(){
+      const ulEle = document.querySelector(".pic-list")
+      const liWidth=120
+      const space = 6
+      console.log(this.shopInfo.pics)
+      const size = this.shopInfo.pics.length
+      ulEle.style.width=(liWidth+space)*size-space+'px'
+    }
   },
   watch:{
-    // shopInfo(){
-    //   this.$nextTick(()=>{
-    //   this.bScroll.refresh()
-    // })
-    // }
+    shopInfo(){
+      this.$nextTick(()=>{
+      this.bScroll.refresh()
+      this.setWidth()
+      this.shopInfo.pics && new BScroll(".pic-wrapper",{
+        scrollX:true
+      })
+    })
+    }
   },
   computed:{
     ...mapState(['shopInfo'])
