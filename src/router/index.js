@@ -1,15 +1,35 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
+/**
+ * 
+ * 路由懒加载方式
+ * 
+*/
+const Msite = () => import("@/pages/MSite")
+const Search = () => import("@/pages/Search")
+const Order = () => import("@/pages/Order")
+const MyProfile = () => import("@/pages/MyProfile")
+const Login = () => import("@/pages/Login")
+const Shop = () => import("@/pages/Shop")
+const ShopGoods = () => import("@/pages/Shop/ShopGoods")
+const ShopInfo = () => import("@/pages/Shop/ShopInfo")
+const ShopRatings = () => import("@/pages/Shop/ShopRatings")
 
-import MSite from "../pages/MSite"
-import Search from "../pages/Search"
-import Order from "../pages/Order"
-import MyProfile from "../pages/MyProfile"
-import Login from "../pages/login"
-import Shop from "../pages/Shop"
-import ShopGoods from "../pages/Shop/ShopGoods"
-import ShopInfo from "../pages/Shop/ShopInfo"
-import ShopRatings from "../pages/Shop/ShopRatings"
+
+/**
+ * 
+ * 普通加载路由组件方式
+ * 
+*/
+// import MSite from "../pages/MSite"
+// import Search from "../pages/Search"
+// import Order from "../pages/Order"
+// import MyProfile from "../pages/MyProfile"
+// import Login from "../pages/login"
+// import Shop from "../pages/Shop"
+// import ShopGoods from "../pages/Shop/ShopGoods"
+// import ShopInfo from "../pages/Shop/ShopInfo"
+// import ShopRatings from "../pages/Shop/ShopRatings"
 
 Vue.use(VueRouter)
 export default new VueRouter({
@@ -22,7 +42,7 @@ export default new VueRouter({
     {
       name:'msite',
       path:"/msite",
-      component:MSite,
+      component:Msite,
       meta:{
         showNav:true
       }

@@ -66,11 +66,18 @@ export default {
     }
   },
   mounted(){
+    if(!this.shopInfo.pics){
+      return
+    }
     this._initScroll()
   },
   methods:{
     _initScroll(){
       this.bScroll = new BScroll(".shop-info")
+      this.setWidth()
+      this.picScroll = new BScroll(".pic-wrapper",{
+        scrollX:true
+      })
     },
     setWidth(){
       const ulEle = document.querySelector(".pic-list")
@@ -84,11 +91,7 @@ export default {
   watch:{
     shopInfo(){
       this.$nextTick(()=>{
-      this.bScroll.refresh()
-      this.setWidth()
-      this.shopInfo.pics && new BScroll(".pic-wrapper",{
-        scrollX:true
-      })
+      this._initScroll()
     })
     }
   },
