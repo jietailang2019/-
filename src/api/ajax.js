@@ -25,10 +25,10 @@ export default function ajax(url='',data={},type="GET"){
       promise = axios.post(url,data)
     }
     promise.then(
-      function(res){
+      res=>{
         resolve(res.data)
       }
-    ).catch(function(error){
+    ).catch(error=>{
       reject(error)
     })
   })

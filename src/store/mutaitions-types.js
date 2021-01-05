@@ -6,3 +6,6 @@ export const LOG_OUT = "log_out"
 export const SHOP_GOODS = "shop_goods"
 export const SHOP_RATINGS = "shop_ratings"
 export const SHOP_INFO = "shop_info"
+export const INCREMENT_FOOD_COUNT = "increment_food_count" //增加food.count
+export const DECREMENT_FOOD_COUNT = "decrement_food_count" //减少food。count
+export const CLEAR_SHOP_CART = "clear_shop_cart" //清空购物车

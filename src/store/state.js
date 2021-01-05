@@ -7,5 +7,6 @@ export default{
   userInfo:{},//登录用户信息
   goods:[],//商户商品信息
   ratings:[],//商户商品评价
-  shopInfo:{}//商户信息
+  shopInfo:{},//商户信息
+  shopCart:[]//购物车信息
 }

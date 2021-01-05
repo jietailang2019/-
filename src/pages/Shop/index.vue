@@ -21,7 +21,7 @@
 
 <script>
   //import x from ''
-  import ShopHeader from "../../components/ShopHeader"
+  import ShopHeader from "@/components/ShopHeader"
   import {mapActions,mapState} from "vuex"
   export default {
     mounted(){

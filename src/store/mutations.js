@@ -1,3 +1,4 @@
+import Vue from "vue"
 import {
   GET_FOODS_CATEGORY,
   GET_SHOPS,
@@ -6,7 +7,10 @@ import {
   LOG_OUT,
   SHOP_GOODS,
   SHOP_RATINGS,
-  SHOP_INFO
+  SHOP_INFO,
+  INCREMENT_FOOD_COUNT,
+  DECREMENT_FOOD_COUNT,
+  CLEAR_SHOP_CART
 } from "./mutaitions-types"
 export default{
   //存储食品分类信息
@@ -40,5 +44,36 @@ export default{
   //存储商户信息
   [SHOP_INFO](state,{info}){
     state.shopInfo = info
+  },
+  //增加food.count
+  [INCREMENT_FOOD_COUNT](state,{food}){
+    if(!food.count){//第一次food中并不存在count
+     //利用对象展开符  新对象替换老对象 数值变了，但是界面没有响应更新
+     //food=Object.assign(food,{count:1})无效
+      //food={...food,count:1} 无效
+      Vue.set(food,"count",1) //有效
+      state.shopCart.push(food)
+      //food.count=1 //新增属性
+    }else{
+      food.count++
+    }
+  },
+  //减少food.count
+  [DECREMENT_FOOD_COUNT](state,{food}){
+    if(food.count){
+      food.count--
+      if(food.count===0){
+        state.shopCart.splice(state.shopCart.indexOf(food),1)
+      }
+    }
+  },
+  //清空购物车
+  [CLEAR_SHOP_CART](state){
+    if(state.shopCart){
+      state.shopCart.forEach(food=>{
+        food.count=0
+      })
+      state.shopCart=[]
+    }
   }
 }

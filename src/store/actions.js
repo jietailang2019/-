@@ -2,11 +2,6 @@ import {
   getAddress,
   getFoodsCategory,
   getShops,
-  getSearchShops,
-  getCaptcha,
-  loginPwd,
-  getSendCode,
-  LoginSms,
   getUserInfo,
   userLogout,
   getShopInfo,
@@ -72,21 +67,35 @@ export default{
     }
   },
   //  异步获取商户评论信息
-  async get_shop_ratings({commit}){
+  async get_shop_ratings({commit},cb){
     const result = await getShopRatings()
     if(result.code ===0){
       const ratings = result.data
       commit('shop_ratings',{ratings})
+      cb && cb()
     }
   },
   //  异步获取商户信息
   async get_shop_info({commit},payload){
     const result = await getShopInfo()
-    const {params,cb} = payload
+    //const {params,cb} = payload
     if(result.code ===0){
       const info = result.data
       commit('shop_info',{info})
-      cb && cb()
+      //cb && cb()
     }
+  },
+  //更新cartControl数值
+  updateFoodCount({commit},{isAdd,food}){
+    if(isAdd){
+      //增加count数量
+      commit("increment_food_count",{food})
+    }else{
+      commit("decrement_food_count",{food})
+    }
+  },
+  //清空购物车
+  clearShopCart({commit}){
+    commit("clear_shop_cart")
   }
 }

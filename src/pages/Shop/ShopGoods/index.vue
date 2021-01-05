@@ -19,10 +19,10 @@
       </div>
       <div class="foods-wrapper" ref="foodsWrapper">
         <ul>
-          <li class="food-list-hook" v-for="(good,index) in goods" :key="index">
+          <li class="food-list-hook" v-for="(good,index) in goods" :key="index" >
             <h1 class="title">{{good.name}}</h1>
             <ul>
-              <li class="food-item bottom-border-1px" v-for="(food,index) in good.foods" :key="index">
+              <li class="food-item bottom-border-1px" v-for="(food,index) in good.foods" :key="index" @click="showFood(food)">
                 <div class="icon">
                   <img
                     width="57"
@@ -41,14 +41,18 @@
                     <span class="old">￥{{food.oldPrice}}</span>
                     <span class="now">￥{{food.price}}</span>
                   </div>
-                  <div class="cartcontrol-wrapper">CartControl</div>
+                  <div class="cartcontrol-wrapper">
+                    <cart-control :food="food"/>
+                  </div>
                 </div>
               </li>
             </ul>
           </li>
         </ul>
       </div>
+      <shop-cart/>
     </div>
+    <food :food="food" ref="food"/>
   </div>
 </template>
 
@@ -56,17 +60,21 @@
 //import x from ''
 import { mapActions, mapState } from "vuex";
 import BetterScroll from "better-scroll"
+import CartControl from "@/components/CartControl"
+import ShopCart from "@/components/ShopCart"
+import Food from "@/components/Food"
 export default {
   data(){
     return{
       currentIndex:0,
       tops:[],//右侧li高度数组
-      scrollY:0
+      scrollY:0,
+      food:{}
     }
   },
   mounted() {
     //传递回调函数 初始化scroll插件,初始化时机很重要
-    this.get_shop_goods(()=>{
+    this.get_shop_goods().then(()=>{
       this.$nextTick(()=>{
         this._initScroll()
         this._initTops()
@@ -130,11 +138,20 @@ export default {
       })
       //return index >0 ? index :0
       this.currentIndex = index >0 ? index :0
+    },
+    showFood(food){
+      this.food = food
+      this.$refs.food.toggleShow()
     }
   },
   computed: {
     ...mapState(["goods"]),
   },
+  components:{
+    CartControl,
+    Food,
+    ShopCart
+  }
 };
 </script>
 
