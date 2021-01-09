@@ -19,7 +19,7 @@ module.exports = {
         }
       },
       '/mock': { // 匹配所有以 '/mock'开头的请求路径
-        target: 'http://127.0.0.1:7300/mock/5fec2c3251368b41f4fcc013/shop', // 代理目标的基础路径
+        target: 'http://baota.shhuamei.cn:7300/mock/5ff94ece6ed42d082c4bdc07/shop', // 代理目标的基础路径
         changeOrigin: true, // 支持跨域
         pathRewrite: {// 重写路径: 去掉路径中开头的'/mock'
           '^/mock': ''

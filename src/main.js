@@ -10,7 +10,7 @@ import loading from "@/common/images/loading.gif"
 Vue.use(VueLazyload, {
   loading
 })
-
+Vue.config.devtools = true
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
